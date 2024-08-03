@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Inventory Tracker</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/add_item">Add Item</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <section id="inventory">
+            <h2>Your Inventory Items</h2>
+            <div class="item-list">
+                {% for item in items %}
+                <div class="item">
+                    <p>Name: {{ item.name }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Description: {{ item.description }}</p>
+                    <a href="{{ url_for('update_item', item_id=item.id) }}">Update</a>
+                    <a href="{{ url_for('delete_item', item_id=item.id) }}" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Inventory Tracker</p>
+    </footer>
+</body>
+</html>
